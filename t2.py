@@ -8,9 +8,13 @@ gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
 faces = face_cascade.detectMultiScale(gray_img, scaleFactor = 1.2, minNeighbors = 5)
 
+# print(img)
+
 for x, y, w, h in faces:
-    # img = cv2.rectangle(img, (x, y), (x + w, y + h), (0, 0, 0), 3)
-    img = cv2.circle(img, (x + w / 2, y + h / 2), (w / 2) + 5, (255, 255, 255), 3)
+    # cv2.rectangle(img, (x, y), (x + w, y + h), (0, 0, 0), 3)
+    cv2.circle(img, (x + w / 2, y + h / 2), (w / 2) + 5, (255, 255, 255), 3)
+
+# print(img)
 
 scale = 0.6
 

@@ -13,8 +13,6 @@ width, height = frame.shape[1], frame.shape[0]
 scale = 1000.0 / width
 
 while check:
-    a += 1
-    check, frame = video.read()
     resized = cv2.resize(frame, ((int(width * scale)),
         (int(height * scale))), fx = scale, fy = scale,
         interpolation = cv2.INTER_LINEAR)
@@ -31,6 +29,7 @@ while check:
     key = cv2.waitKey(10)
     if key == ord('q'):
         break
+    check, frame = video.read()
 
 video.release()
 cv2.destroyAllWindows()

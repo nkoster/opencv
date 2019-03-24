@@ -5,8 +5,8 @@ arg = 0
 if len(sys.argv) > 1:
     arg = sys.argv[1]
 video = cv2.VideoCapture(arg)
-face_cascade = cv2.CascadeClassifier('./haarcascade_frontalface_default.xml')
-eye_cascade = cv2.CascadeClassifier('./haarcascade_eye.xml')
+face_cascade = cv2.CascadeClassifier('./haar/haarcascade_frontalface_alt2.xml')
+eye_cascade = cv2.CascadeClassifier('./haar/haarcascade_eye.xml')
 width, height = 0, 0
 check, frame = video.read()
 gray_img = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -27,7 +27,7 @@ while check:
         for ex, ey, ew, eh in eyes:
             cv2.circle(roi_color, (ex + (ew / 2), ey + (eh / 2)), ew, (255, 255, 255), 3)
     cv2.imshow('video', resized)
-    key = cv2.waitKey(10)
+    key = cv2.waitKey(20)
     if key == ord('q'):
         break
     check, frame = video.read()

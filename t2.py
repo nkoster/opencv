@@ -5,8 +5,8 @@ arg = 0
 if len(sys.argv) > 1:
     arg = sys.argv[1]
 
-face_cascade = cv2.CascadeClassifier('./haarcascade_frontalface_default.xml')
-eye_cascade = cv2.CascadeClassifier('./haarcascade_eye.xml')
+face_cascade = cv2.CascadeClassifier('./haar/haarcascade_frontalface_alt2.xml')
+eye_cascade = cv2.CascadeClassifier('./haar/haarcascade_eye.xml')
 
 img = cv2.imread(arg, 1)
 width, height = img.shape[1], img.shape[0]
@@ -31,6 +31,7 @@ for fx, fy, fw, fh in faces:
     eyes = eye_cascade.detectMultiScale(roi_gray, scaleFactor=1.25, minNeighbors=5)
     for ex, ey, ew, eh in eyes:
         cv2.circle(roi_color, (ex + (ew / 2), ey + (eh / 2)), ew, (255, 255, 255), 3)
+    cv2.imwrite('./roi.png', roi_color)
 
 cv2.imshow('Faces and Eyes', resized)
 cv2.waitKey(0)

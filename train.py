@@ -1,11 +1,15 @@
 import cv2
 import os
+import sys
 import numpy as np
 from PIL import Image
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-
-image_dir = os.path.join(BASE_DIR, 'images')
+arg = ''
+if len(sys.argv) > 1:
+    image_dir = sys.argv[1]
+else:
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    image_dir = os.path.join(BASE_DIR, 'images')
 
 face_cascade = cv2.CascadeClassifier('./haar/haarcascade_frontalface_alt2.xml')
 

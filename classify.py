@@ -2,6 +2,7 @@ import sys
 import cv2
 import random
 import string
+import os
 
 def randomword(length):
    letters = string.ascii_lowercase
@@ -29,32 +30,29 @@ resized = cv2.resize(img, ((int(width * scale)),
 def classify(arg, c):
     print(arg, c)
 
-for i in range(len(sys.argv)):
-    if i > 1:
-        print(sys.argv[i].split(':')[0] + ' ' + sys.argv[i].split(':')[1])
-
 cv2.imshow(arg, resized)
 person = 'unknown'
+classified = False
 key = cv2.waitKey(0)
-if key == ord('l'):
-    person = 'laury'
-if key == ord('n'):
-    person = 'niels'
-if key == ord('k'):
-    person = 'kees'
-if key == ord('m'):
-    person = 'max'
-if key == ord('d'):
-    person = 'danny'
-if key == ord('w'):
-    person = 'kriz'
-if key == ord('r'):
-    person = 'ray'
 
-cv2.destroyAllWindows()
-if person != 'unknown':
-    path = './images/' + person + '/' + randomword(6) + '.png'
-    print(path)
-    cv2.imwrite(path , resized)
-else:
-    print(arg)
+for i in range(len(sys.argv)):
+    if i > 1:
+        classifyKey = sys.argv[i].split(':')[0]
+        classifyName = sys.argv[i].split(':')[1]
+        path = './images/'
+        if not os.path.exists(path):
+            print('-- create ' + path)
+            os.mkdir(path)
+        if (key == ord(classifyKey)):
+            classified = True
+            path = path + classifyName + '/'
+            if not os.path.exists(path):
+                print('-- create ' + path)
+                os.mkdir(path)
+            cv2.destroyAllWindows()
+            path = path + randomword(6) + '.png'
+            cv2.imwrite(path , resized)
+            print('-- save ' + path)
+
+if not classified:
+    print('-- ' + arg)

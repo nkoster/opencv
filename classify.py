@@ -27,9 +27,6 @@ resized = cv2.resize(img, ((int(width * scale)),
     (int(height * scale))), fx=scale, fy=scale,
     interpolation=cv2.INTER_LINEAR)
 
-def classify(arg, c):
-    print(arg, c)
-
 cv2.imshow(arg, resized)
 person = 'unknown'
 classified = False

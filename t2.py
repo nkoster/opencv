@@ -1,5 +1,6 @@
 import sys
 import cv2
+import os
 
 arg = 0
 if len(sys.argv) > 1:
@@ -34,6 +35,12 @@ for fx, fy, fw, fh in faces:
     cv2.imwrite('./roi.png', roi_color)
 
 cv2.imshow(arg, resized)
-while cv2.waitKey(0) != ord('q'):
-    continue
+key = cv2.waitKey(0)
+while key != ord('q'):
+    if key == ord('d'):
+        os.remove(arg)
+        print('-- rm ' + arg)
+        key = ord('q')
+    else:
+        key = cv2.waitKey(0)
 cv2.destroyAllWindows()
